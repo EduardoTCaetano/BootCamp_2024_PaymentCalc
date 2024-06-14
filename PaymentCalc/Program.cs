@@ -5,41 +5,42 @@ class Program
 {
     static void Main(string[] args)
     {
-        List<Funcionario> funcionario = new List<Funcionario>();
+        List<Employe> employe = new List<Employe>();
 
-        Console.Write("Quantos funcionários deseja calcular?: ");
+        Console.Write("How many employees do you want to calculate?: ");
         int n = int.Parse(Console.ReadLine());
 
         for (int i = 1; i <= n; i++)
         {
-            Console.WriteLine($"Funcionario #{i}:");
-            Console.Write("Terceirizado (s/n)? ");
+            Console.WriteLine($"Employe #{i}:");
+            Console.Write("Outsourced (s/n)? ");
             char ch = char.Parse(Console.ReadLine());
 
-            Console.Write("Nome: ");
+            Console.Write("Name: ");
             string name = Console.ReadLine();
-            Console.Write("Horas: ");
+            Console.Write("Hours: ");
             int hours = int.Parse(Console.ReadLine());
-            Console.Write("Valor por hora: ");
+            Console.Write("Hourly rate: ");
             double valuePerHour = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
 
             if (ch == 's' || ch == 'S')
             {
-                Console.Write("Adicional: ");
+                Console.Write("Additional: ");
                 double additionalCharge = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-                funcionario.Add(new FuncionarioTerceirizado(name, hours, valuePerHour, additionalCharge));
+                employe.Add(new EmployeOutsourced(name, hours, valuePerHour, additionalCharge));
             }
             else
             {
-                funcionario.Add(new Funcionario(name, hours, valuePerHour));
+                employe.Add(new Employe(name, hours, valuePerHour));
             }
         }
 
         Console.WriteLine();
-        Console.WriteLine("Pagamento total: ");
-        foreach (Funcionario emp in funcionario)
+        Console.WriteLine("Total payment: ");
+        foreach (Employe emp in employe)
         {
-            Console.WriteLine($"{emp.Nome} - R$ {emp.Pagamento().ToString("F2", CultureInfo.InvariantCulture)}");
+            Console.WriteLine($"{emp.Name} - R$ {emp.Payment().ToString("F2", CultureInfo.InvariantCulture)}");
         }
+        Console.ReadKey();
     }
 }
